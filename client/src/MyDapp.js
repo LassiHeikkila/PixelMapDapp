@@ -23,6 +23,7 @@ const MyDapp = ({drizzle, drizzleState}) => {
     const [pixelsKey, setPixelsKey] = useState(null); 
 
     useEffect(() => {
+        // use cached calls 
         const hk = contract.methods["getHeight"].cacheCall();
         const wk = contract.methods["getWidth"].cacheCall();
         const pk = contract.methods["getPixels"].cacheCall();
@@ -41,6 +42,7 @@ const MyDapp = ({drizzle, drizzleState}) => {
     }, [contract.methods]);
 
     useEffect(() => {
+        // get the value from the cached call
         const v = state.contracts.PixelMapContract.getHeight[heightKey];
         if (v && v.value) {
             setHeight(v.value)
@@ -48,13 +50,15 @@ const MyDapp = ({drizzle, drizzleState}) => {
     }, [heightKey, state.contracts.PixelMapContract.getHeight]);
 
     useEffect(() => {
+        // get the value from the cached call
         const v = state.contracts.PixelMapContract.getWidth[widthKey];
         if (v && v.value) {
             setWidth(v.value)
         }
     }, [widthKey, state.contracts.PixelMapContract.getWidth]);
 
-    useEffect(()=>{
+    useEffect(() => {
+        // get the value from the cached call
         const v = state.contracts.PixelMapContract.getPixels[pixelsKey];
         if (v && v.value) {
             setPixels(v.value)
@@ -62,6 +66,7 @@ const MyDapp = ({drizzle, drizzleState}) => {
     }, [pixelsKey, state.contracts.PixelMapContract.getPixels]);
 
     useEffect(() => {
+        // redraw the canvas when pixels content, height, or width change
         if (pixels === null) {
             return;
         }
@@ -69,9 +74,12 @@ const MyDapp = ({drizzle, drizzleState}) => {
             for (var x = 0; x < width; x++) {
                 const idx = y*width + x;
                 if (pixels[idx] === true) {
+                    // pixel is on => fill it with black
                     ctx.fillStyle = 'black';
                     ctx.fillRect(x*scaling, y*scaling, 1*scaling, 1*scaling);
                 } else {
+                    // pixel is off => fill it with white
+                    // canvas starts off as white, but we still want to paint it white in case a pixel is toggled from on to off
                     ctx.fillStyle = 'white';
                     ctx.fillRect(x*scaling, y*scaling, 1*scaling, 1*scaling);
                 }
