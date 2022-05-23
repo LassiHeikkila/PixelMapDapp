@@ -10,7 +10,7 @@ You can run the DApp if you are running Ganache locally. Just `truffle migrate` 
 
 You should see something like this:
 
-** insert screenshot **
+![image](https://user-images.githubusercontent.com/10546142/169889341-700ba9b7-bee2-46db-af2f-5fe55eb4b7d5.png)
 
 ## Future improvements
 - bigger grid
