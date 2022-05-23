@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.0 <0.9.0;
 
-// A simple smart contract representing a 32*32 bitmap where each pixel can be individually controlled with 1-bit colour (on/off)
+// A simple smart contract representing a height*width bitmap where each pixel can be individually controlled with 1-bit colour (on/off)
 // Essentially https://pixelcanvas.io/ but on a much smaller scale.
 // Keeping it small because its incredibly inefficient :)
 contract PixelMapContract {
